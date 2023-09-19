@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator!</title>
+    <link rel="stylesheet" href="/css/simple.min.css">
+    <link rel="stylesheet" href="/css/words.css">
+</head>
+
+<body>
+
+<header>
+    <hgroup>
+        <h1>Password Generator!</h1>
+    </hgroup>
+    <nav>
+        <a href="index.html">Standard</a>
+        <a class="current"  href="#">Words</a>
+        <a href="/">Custom</a>
+    </nav>
+</header>
+
+<main>
+    <aside>
+        <p>The usefulness of this tool is dubious at best.</p>
+    </aside>
+
+    <div>
+        # of words
+        <label>
+            <input id="number-of-words-input" type="text">
+            <input id="number-of-words-slider" type="range">
+        </label>
+    </div>
+    <div>
+        Word length
+        <label>
+            <input id="word-length-input" type="text">
+            <input id="word-length-slider" type="range">
+        </label>
+    </div>
+    <div>
+        <p id="error-message">&nbsp;</p>
+    </div>
+    <div>
+        <label>
+            <textarea rows=3 id="result"></textarea>
+        </label>
+    </div>
+    <div>
+        <button id="generate-button">Generate</button>
+        <button id="copy-button">Copy</button>
+    </div>
+    <br>
+    <div>
+        <details id="words">
+            <summary>Words (lots of them)</summary>
+            <p>Below is every word used in this tool. Be warned, some of the lists can be quite long.</p>
+        </details>
+        <details>
+            <summary>Allow me to explain...</summary>
+            <p>
+                A password consisting of a series of memorable words can be both strong and easy to remember,
+                adding the necessary complexity to enhance security. While this tool allows you to generate these type of
+                passwords, the words that it conjures up might not be memorable or ones you even know, reducing its efficacy.
+            </p>
+            <p><samp>cool beans flip endless man</samp> would be an example using this method, serving to be both secure and memorable.</p>
+        </details>
+    </div>
+</main>
+
+<footer>
+    <p>Work In Progress</p>
+</footer>
+
+<script src="/js/words.js"></script>
+</body>
+</html>
