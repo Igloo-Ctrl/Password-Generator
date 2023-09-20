@@ -8,7 +8,7 @@ function initializePasswordGenerator() {
 }
 
 function setupSliderAndInput() {
-    const lengthInput = document.getElementById("length");
+    const lengthInput = document.getElementById("length-input");
     const lengthSlider = document.getElementById("length-slider");
 
     const MIN_PASSWORD_LENGTH = 8;
@@ -96,7 +96,7 @@ function generatePassword(selectedCharacters) {
 
     // generates the password by selecting random indexes of random character sets
     let password = "";
-    const passwordLength = document.getElementById("length").value;
+    const passwordLength = document.getElementById("length-input").value;
     for (let i = 0; i < passwordLength; i++) {
         const choice = selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
         const charSet = characterSet[choice];

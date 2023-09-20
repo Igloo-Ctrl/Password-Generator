@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator!</title>
+    <link rel="stylesheet" href="/css/simple.min.css">
+    <link rel="stylesheet" href="/css/standard.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Password Generator!</h1>
+        <nav>
+            <a href="index.html">Standard</a>
+            <a href="words.html">Words</a>
+            <a href="/">Custom</a>
+            <a class="current" href="#">Caesar</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <label>
+            Original Message
+            <textarea rows=3></textarea>
+        </label>
+
+
+        <label>
+            Ciphered Message
+            <textarea rows=3></textarea>
+        </label>
+
+        <div>
+            <label>
+                <input id="caesar-slider" type="range">
+            </label>
+        </div>
+        <div id="test">
+            <label>
+                Characters to shift by
+                <input id="caesar-input">
+            </label>
+        </div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Work In Progress</p>
+    </footer>
+
+</body>
+</html>
