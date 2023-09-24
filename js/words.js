@@ -1,4 +1,6 @@
 function main() {
+    updateInitialHistory();
+    setupClearHistoryButton();
     setupSliderAndInput();
     setupGenerateButton().then();
     setupCopyButton();
@@ -110,9 +112,10 @@ async function setupGenerateButton() {
         }
 
         // remove the trailing space
-        result.value = password.trim();
+        const passwordTrimmed = password.trim()
+        updateHistoryAndLocalStorage(passwordTrimmed);
+        result.value = passwordTrimmed;
     }
-
     generatePassword();
 }
 
@@ -157,6 +160,54 @@ function setupCopyButton() {
             result.blur();
             document.getElementById("error-message").innerText = "Password copied to clipboard!";
         }
+    })
+}
+
+function updateHistoryAndLocalStorage(password) {
+    const key = "wordPasswordHistory";
+    let passwordArray = [];
+
+    // checks if local storage exists
+    if (localStorage.getItem(key)) {
+        passwordArray = JSON.parse(localStorage.getItem(key));
+    }
+
+    // updates the local storage
+    passwordArray.push(password);
+    localStorage.setItem(key, JSON.stringify(passwordArray));
+
+    const history = document.getElementById("history");
+    const passwordListItem = document.createElement("li");
+    passwordListItem.className = "password";
+    passwordListItem.innerHTML = `<samp>${password}</samp>`;
+    history.appendChild(passwordListItem);
+}
+
+// updates the initial history once so the dom doesn't need to be constantly regenerated
+function updateInitialHistory() {
+    const key = "wordPasswordHistory";
+    if (localStorage.getItem(key)) {
+        const passwordArray = JSON.parse(localStorage.getItem(key));
+        passwordArray.forEach(item => {
+            const history = document.getElementById("history");
+            const passwordListItem = document.createElement("li");
+            passwordListItem.className = "password";
+            passwordListItem.innerHTML = `<samp>${item}</samp>`;
+            history.appendChild(passwordListItem);
+        })
+    }
+}
+
+function setupClearHistoryButton() {
+    document.getElementById("clear-button").addEventListener("click", function () {
+        const passwords = document.getElementsByClassName("password");
+        const passwordsArray = Array.from(passwords);
+
+        passwordsArray.forEach(item => {
+            item.remove();
+        })
+
+        localStorage.removeItem("wordPasswordHistory");
     })
 }
 

@@ -22,16 +22,19 @@
 
     <main>
 
-        <label>
-            Original Message
-            <textarea rows=3></textarea>
-        </label>
+        <div>
+            <label>
+                Original Text
+                <textarea rows=3 id="original-text"></textarea>
+            </label>
+        </div>
 
-
-        <label>
-            Ciphered Message
-            <textarea rows=3></textarea>
-        </label>
+        <div>
+            <label>
+                Ciphered Text
+                <textarea rows=3 id="ciphered-text"></textarea>
+            </label>
+        </div>
 
         <div>
             <label>
@@ -44,14 +47,13 @@
                 <input id="caesar-input">
             </label>
         </div>
-        <div>
-            <button>Submit</button>
-        </div>
     </main>
 
     <footer>
         <p>Work In Progress</p>
     </footer>
+
+    <script src="/js/caesar.js"></script>
 
 </body>
 </html>
