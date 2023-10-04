@@ -137,7 +137,8 @@ function determineLikelyMessage(wordSet, possibilities) {
         possibilityDict[possibility] = 0;
         const wordsArray = possibility.split(" ");
         for (const word of wordsArray) {
-            if (wordSet.has(word)) {
+            const lowerCaseWord = word.toLowerCase();
+            if (wordSet.has(lowerCaseWord)) {
                 possibilityDict[possibility] += 1;
             }
         }
