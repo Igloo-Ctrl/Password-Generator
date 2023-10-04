@@ -43,6 +43,11 @@ function generateCipher() {
     const originalText = document.getElementById("original-text").value;
     const cipheredText = document.getElementById("ciphered-text");
     const offset = parseInt(document.getElementById("caesar-input").value, 10);
+    cipheredText.innerText = calculateCipher(originalText, offset);
+    populatePossibilities();
+}
+
+function calculateCipher(originalText, offset) {
 
     const textLength = originalText.length;
     let convertedText = "";
@@ -73,10 +78,29 @@ function generateCipher() {
                 convertedCharacter -= 26;
             }
         }
-
         convertedText += String.fromCodePoint(convertedCharacter);
     }
-    cipheredText.innerText = convertedText;
+    return convertedText;
+}
+
+function populatePossibilities() {
+
+    const originalText = document.getElementById("original-text").value;
+    const possibilityElement = document.getElementById("possibilities");
+    possibilityElement.innerHTML = "<tr><th>Offset</th><th>Message</th></tr>";
+
+    for (let i = -25; i < 26; i++) {
+        const possibilityEntry = document.createElement("tr");
+        const possibilityOffset = document.createElement("td");
+        const possibilityText = document.createElement("td");
+
+        possibilityOffset.textContent = i;
+        possibilityText.textContent = calculateCipher(originalText, i);
+
+        possibilityEntry.appendChild(possibilityOffset);
+        possibilityEntry.appendChild(possibilityText);
+        possibilityElement.appendChild(possibilityEntry);
+    }
 }
 
 function isAlpha(char) {

@@ -10,50 +10,64 @@
 
 <body>
 
-    <header>
-        <h1>Password Generator!</h1>
-        <nav>
-            <a href="index.html">Standard</a>
-            <a href="words.html">Words</a>
-            <a href="/">Custom</a>
-            <a class="current" href="#">Caesar</a>
-        </nav>
-    </header>
+<header>
+    <h1>Password Generator!</h1>
+    <nav>
+        <a href="index.html">Standard</a>
+        <a href="words.html">Words</a>
+        <a href="/">Custom</a>
+        <a class="current" href="#">Caesar</a>
+    </nav>
+</header>
 
-    <main>
+<main>
 
-        <div>
-            <label>
-                Original Text
-                <textarea rows=3 id="original-text"></textarea>
-            </label>
-        </div>
+    <div>
+        <label>
+            Original Text
+            <textarea rows=3 id="original-text"></textarea>
+        </label>
+    </div>
 
-        <div>
-            <label>
-                Ciphered Text
-                <textarea rows=3 id="ciphered-text"></textarea>
-            </label>
-        </div>
+    <div>
+        <label>
+            Ciphered Text
+            <textarea rows=3 id="ciphered-text"></textarea>
+        </label>
+    </div>
 
-        <div>
-            <label>
-                <input id="caesar-slider" type="range">
-            </label>
-        </div>
-        <div id="test">
-            <label>
-                Characters to shift by
-                <input id="caesar-input">
-            </label>
-        </div>
-    </main>
+    <div>
+        <label>
+            <input id="caesar-slider" type="range">
+        </label>
+    </div>
+    <div>
+        <label>
+            Characters to shift by
+            <input id="caesar-input">
+        </label>
+    </div>
+    <br>
+    <div>
+        <details>
+            <summary>Possibilities</summary>
+            <p>This section will show you the entered text with each possible offset. It also demonstrates how easy it is for a message of this nature to be decoded.</p>
+            <table id=possibilities>
+                <tr>
+                    <th>Offset</th>
+                    <th>Message</th>
+                </tr>
+            </table>
+        </details>
+    </div>
 
-    <footer>
-        <p>Work In Progress</p>
-    </footer>
+</main>
 
-    <script src="/js/caesar.js"></script>
+<footer>
+    <p>Work In Progress</p>
+</footer>
+
+<script src="/js/caesar.js"></script>
 
 </body>
 </html>

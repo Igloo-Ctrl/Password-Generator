@@ -33,3 +33,10 @@ li {
 /*    align-items: center; !* Vertical center alignment *!*/
 /*    height: 100vh; !* This ensures the container takes the full viewport height *!*/
 /*}*/
+
+td {
+    /*max-width: 100% !important;*/
+    /*table-layout: auto !important;*/
+    /*overflow-x: auto !important;*/
+    word-wrap: anywhere;
+}
