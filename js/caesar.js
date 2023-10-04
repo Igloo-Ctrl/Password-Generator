@@ -35,16 +35,26 @@ function setupSliderAndInput() {
 }
 
 function setupGenerateMethods() {
-    document.getElementById("original-text").addEventListener("input", generateCipher);
-    document.getElementById("caesar-slider").addEventListener("change", generateCipher);
+    // a strange way of wrapping the listeners to ensure the set promise is fulfilled and can be passed into the functions
+    createWordSet().then(wordSet => {
+        document.getElementById("original-text").addEventListener("input", function () {
+            generateCipher(wordSet)
+        });
+        document.getElementById("caesar-slider").addEventListener("change", function () {
+            generateCipher(wordSet)
+        });
+    });
 }
 
-function generateCipher() {
+function generateCipher(wordSet) {
     const originalText = document.getElementById("original-text").value;
     const cipheredText = document.getElementById("ciphered-text");
     const offset = parseInt(document.getElementById("caesar-input").value, 10);
-    cipheredText.innerText = calculateCipher(originalText, offset);
-    populatePossibilities();
+
+    cipheredText.value = calculateCipher(originalText, offset);
+
+    const possibilities = populatePossibilities();
+    determineLikelyMessage(wordSet, possibilities);
 }
 
 function calculateCipher(originalText, offset) {
@@ -55,7 +65,7 @@ function calculateCipher(originalText, offset) {
     for (let i = 0; i < textLength; i++) {
         const selectedCharacter = originalText[i];
 
-        // Check if space, number, or symbol
+        // check if space, number, or symbol
         if (selectedCharacter === " " || !isAlpha(selectedCharacter)) {
             convertedText += selectedCharacter;
             continue;
@@ -63,6 +73,8 @@ function calculateCipher(originalText, offset) {
 
         let convertedCharacter = originalText.charCodeAt(i)
 
+        // if a character has gotten to this point, it must be a letter
+        // checks if it is a lowercase or uppercase and then deals with the potential wraparound
         if (convertedCharacter >= 97 && convertedCharacter <= 122) {
             convertedCharacter += offset
             if (convertedCharacter < 97) {
@@ -78,6 +90,7 @@ function calculateCipher(originalText, offset) {
                 convertedCharacter -= 26;
             }
         }
+        // converts characters back from ascii
         convertedText += String.fromCodePoint(convertedCharacter);
     }
     return convertedText;
@@ -89,23 +102,92 @@ function populatePossibilities() {
     const possibilityElement = document.getElementById("possibilities");
     possibilityElement.innerHTML = "<tr><th>Offset</th><th>Message</th></tr>";
 
+    const possibilities = [];
+
     for (let i = -25; i < 26; i++) {
         const possibilityEntry = document.createElement("tr");
         const possibilityOffset = document.createElement("td");
         const possibilityText = document.createElement("td");
 
-        possibilityOffset.textContent = i;
-        possibilityText.textContent = calculateCipher(originalText, i);
+        possibilityOffset.textContent = `${i}`;
+
+        const generatedCipher = calculateCipher(originalText, i)
+        possibilities.push(generatedCipher);
+        possibilityText.textContent = generatedCipher;
 
         possibilityEntry.appendChild(possibilityOffset);
         possibilityEntry.appendChild(possibilityText);
         possibilityElement.appendChild(possibilityEntry);
     }
+    return possibilities;
 }
 
 function isAlpha(char) {
     const letterPattern = /^[A-Za-z]$/;
     return letterPattern.test(char);
+}
+
+function determineLikelyMessage(wordSet, possibilities) {
+
+    let count = possibilities[0].split(" ").length;
+    let possibilityDict = {};
+
+    // check each possibility and calculate how many of its words are English
+    for (const possibility of possibilities) {
+        possibilityDict[possibility] = 0;
+        const wordsArray = possibility.split(" ");
+        for (const word of wordsArray) {
+            if (wordSet.has(word)) {
+                possibilityDict[possibility] += 1;
+            }
+        }
+    }
+
+    // find the possibility with the highest occurrence of English words
+    let likelyMessage;
+    outerLoop: for (let i = count; i > 0; i--) {
+        for (const key in possibilityDict) {
+            if (possibilityDict[key] === i) {
+                likelyMessage = key;
+                break outerLoop;
+            }
+        }
+    }
+
+    // display a message depending on if text is present, if a likelyMessage exists or anything else
+    const guessParagraph = document.getElementById("guess-paragraph");
+    if (document.getElementById("original-text").value === "") {
+        guessParagraph.innerText = "My prediction will go here once you enter some text."
+    } else if (likelyMessage) {
+        document.getElementById("guess-paragraph").innerText =
+            `If I had to guess, the original message was "${likelyMessage}".`
+    } else {
+        document.getElementById("guess-paragraph").innerText =
+            "Your original message wasn't English, was a series of numbers or intelligible text."
+    }
+
+}
+
+
+async function fetchWordList() {
+    const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    try {
+        const response = await fetch(wordsUrl);
+        const data = await response.text();
+        return data.split('\n');
+    } catch (error) {
+        console.error("Uh oh, error: ", error);
+        return [];
+    }
+}
+
+async function createWordSet() {
+    const wordList = await fetchWordList();
+    const wordSet = new Set();
+    wordList.forEach(item => {
+        wordSet.add(item);
+    })
+    return wordSet;
 }
 
 setupSliderAndInput();
