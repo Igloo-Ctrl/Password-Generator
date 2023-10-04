@@ -125,8 +125,7 @@ function generateWordLists(wordDict) {
     const lengthList = [
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
         "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-        "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty", "Thirty-One"
-    ];
+        "Twenty-One"];
 
     const lengthListLength = lengthList.length
     for (let i = 0; i < lengthListLength; i++) {
