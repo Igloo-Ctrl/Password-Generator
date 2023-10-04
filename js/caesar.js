@@ -170,7 +170,8 @@ function determineLikelyMessage(wordSet, possibilities) {
 
 
 async function fetchWordList() {
-    const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    // const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/41a0c40004c640b57183c480596ed1f0/raw/09bca8fb9d840134a8af3315e99a66f86d2849a1/gistfile1.txt"
     try {
         const response = await fetch(wordsUrl);
         const data = await response.text();
