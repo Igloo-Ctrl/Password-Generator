@@ -8,7 +8,8 @@ function main() {
 
 // fetches a word list from GitHub and then proceeds to process it
 async function fetchWordList() {
-    const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    // const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/41a0c40004c640b57183c480596ed1f0/raw/09bca8fb9d840134a8af3315e99a66f86d2849a1/gistfile1.txt"
 
     try {
         const response = await fetch(wordsUrl);
@@ -124,8 +125,7 @@ function generateWordLists(wordDict) {
     const lengthList = [
         "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
         "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-        "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty", "Thirty-One"
-    ];
+        "Twenty-One"];
 
     const lengthListLength = lengthList.length
     for (let i = 0; i < lengthListLength; i++) {
