@@ -8,19 +8,16 @@ function setupSliderAndInput() {
 
     let customInputLength = customInputs.length
     for (let i = 0; i < customInputLength; i++) {
+
         customSliders[i].addEventListener("input", function () {
             customInputs[i].value = customSliders[i].value;
         })
-    }
 
-    for (let i = 0; i < customInputLength; i++) {
         customSliders[i].min = MIN_SHIFT_VALUE;
         customSliders[i].max = MAX_SHIFT_VALUE;
         customSliders[i].value = DEFAULT_SLIDER_VALUE;
         customInputs[i].value = customSliders[i].value;
-    }
 
-    for (let i = 0; i < customInputLength; i++) {
         customInputs[i].addEventListener("change", function () {
             const lengthInputValue = parseInt(customInputs[i].value);
             // check for non-number inputs, not robust enough #TO-DO
@@ -45,7 +42,7 @@ function generatePassword() {
     })
 }
 
-document.getElementById("generate-button").addEventListener("click", function() {
+document.getElementById("generate-button").addEventListener("click", function () {
     generatePassword();
 })
 
