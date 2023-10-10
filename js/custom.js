@@ -1,4 +1,4 @@
-function setupSliderAndInput() {
+ function setupSliderAndInput() {
     const customInputs = document.getElementsByClassName("custom-input");
     const customSliders = document.getElementsByClassName("custom-slider");
 
