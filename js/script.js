@@ -1,4 +1,4 @@
-function initializePasswordGenerator() {
+function main() {
     updateInitialHistory();
     setupGenerateButton();
     setupSliderAndInput();
@@ -78,7 +78,6 @@ function generatePassword(selectedCharacters) {
         special: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     };
 
-    // removed
     const characterSetUnambiguous = {
         lowercase: "abcdefghjkmnpqrstuvwxyz", // removed i, o, l
         uppercase: "ABCDEFGHJKLMNPQRSTUVWXYZ", // removed I, O
@@ -145,6 +144,7 @@ function updateInitialHistory() {
         })
     }
 }
+
 // replaces problematic characters that might interfere with the html
 function escapeHtml(unsafe) {
     return unsafe
@@ -197,4 +197,4 @@ function setupClearHistoryButton() {
     })
 }
 
-initializePasswordGenerator();
+main();

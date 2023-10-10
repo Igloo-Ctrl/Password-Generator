@@ -11,72 +11,80 @@
 
 <body>
 
-<header>
-    <hgroup>
-        <h1>Password Generator!</h1>
-    </hgroup>
-    <nav>
-        <a href="index.html">Standard</a>
-        <a href="words.html">Words</a>
-        <a class="current" href="custom.html">Custom</a>
-        <a href="caesar.html">Caesar</a>
-    </nav>
-</header>
+    <header>
+        <hgroup>
+            <h1>Password Generator!</h1>
+        </hgroup>
+        <nav>
+            <a href="index.html">Standard</a>
+            <a href="words.html">Words</a>
+            <a class="current" href="custom.html">Custom</a>
+            <a href="caesar.html">Caesar</a>
+        </nav>
+    </header>
 
-<main>
-    <div>
-        # of lowercase
-        <label>
-            <input type="text" class="custom-input" id="lowercase">
-            <input type="range" class="custom-slider">
-        </label>
-    </div>
-    <div>
-        # of uppercase
-        <label>
-            <input type="text" class="custom-input" id="uppercase">
-            <input type="range" class="custom-slider">
-        </label>
-    </div>
-    <div>
-        # of numbers
-        <label>
-            <input type="text" class="custom-input" id="numbers">
-            <input type="range" class="custom-slider">
-        </label>
-    </div>
-    <div>
-        # of symbols
-        <label>
-            <input type="text" class="custom-input" id="symbols">
-            <input type="range" class="custom-slider">
-        </label>
-    </div>
-    <div>
-        <label>
-            Characters to exclude:
-            <input type="text" id="excluded-characters">
-        </label>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" id="ambiguous">
-            Remove ambiguous characters
-        </label>
-    </div>
-    <div>
-        <button id="generate-button">Generate</button>
-        <button id="randomise-button">Randomise Values</button>
-        <button>Copy</button>
-    </div>
+    <main>
+        <div>
+            # of lowercase
+            <label>
+                <input type="text" class="custom-input" id="lowercase">
+                <input type="range" class="custom-slider">
+            </label>
+        </div>
+        <div>
+            # of uppercase
+            <label>
+                <input type="text" class="custom-input" id="uppercase">
+                <input type="range" class="custom-slider">
+            </label>
+        </div>
+        <div>
+            # of numbers
+            <label>
+                <input type="text" class="custom-input" id="numbers">
+                <input type="range" class="custom-slider">
+            </label>
+        </div>
+        <div>
+            # of symbols
+            <label>
+                <input type="text" class="custom-input" id="special">
+                <input type="range" class="custom-slider">
+            </label>
+        </div>
+        <div>
+            <label>
+                Characters to exclude:
+                <input type="text" id="excluded-characters">
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="ambiguous">
+                Remove ambiguous characters
+            </label>
+        </div>
+        <div>
+            <p id="error-message">&nbsp;</p>
+        </div>
+        <div>
+            <label>
+                <textarea rows=3 id="result"></textarea>
+            </label>
+        </div>
+        <div>
+            <button id="generate-button">Generate</button>
+            <button id="randomise-button">Randomise Values</button>
+            <button id="copy-button">Copy</button>
+        </div>
 
-</main>
+    </main>
 
-<footer>
-    <p>Work In Progress</p>
-</footer>
+    <footer>
+        <p>Work In Progress</p>
+    </footer>
 
-<script src="js/custom.js"></script>
+    <script src="js/custom.js"></script>
 
 </body>
 </html>

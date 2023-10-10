@@ -1,4 +1,11 @@
- function setupSliderAndInput() {
+function main() {
+    setupSliderAndInput();
+    randomiseButton();
+    setupCopyButton();
+    setupGenerateButton();
+}
+
+function setupSliderAndInput() {
     const customInputs = document.getElementsByClassName("custom-input");
     const customSliders = document.getElementsByClassName("custom-slider");
 
@@ -35,7 +42,50 @@
 }
 
 function generatePassword() {
-    const excludedCharacters = document.getElementById("excluded-characters").toString().split("");
+
+
+    const excludedCharacters = document.getElementById("excluded-characters").value.toString().split("");
+    const excludedCharactersSet = new Set(excludedCharacters);
+
+    const characterSet = returnRelevantDict();
+
+    const customInputs = document.getElementsByClassName("custom-input");
+
+    let selectedCharacters = getSelectedCharacters(customInputs);
+    let password = "";
+    for (const key in selectedCharacters) {
+        for (let i = 0; i < selectedCharacters[key]; i++) {
+
+            const currentSet = characterSet[key];
+            let selectedCharacter;
+            let randomCharacter;
+
+            // while the selected letter is in the excluded characters set, pick another
+            do {
+                randomCharacter = Math.floor(Math.random() * currentSet.length);
+                selectedCharacter = currentSet[randomCharacter];
+            } while (excludedCharactersSet.has(selectedCharacter));
+
+            password += selectedCharacter;
+        }
+    }
+
+    document.getElementById("result").value = password;
+
+}
+
+function getSelectedCharacters(inputs) {
+    // returns a dict containing the character set and how many times it should be generated
+    let selectedCharacters = {};
+    let passwordLength = 0;
+    for (let i = 0; i < inputs.length; i++) {
+        selectedCharacters[inputs[i].id] = inputs[i].value;
+        passwordLength += inputs.value;
+    }
+    return selectedCharacters;
+}
+
+function returnRelevantDict() {
 
     const characterSetAmbiguous = {
         lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -44,44 +94,25 @@ function generatePassword() {
         special: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     };
 
-    const customInputs = document.getElementsByClassName("custom-input");
-    const customInputsLength = customInputs.length;
+    const characterSetUnambiguous = {
+        lowercase: "abcdefghjkmnpqrstuvwxyz", // removed i, o, l
+        uppercase: "ABCDEFGHJKLMNPQRSTUVWXYZ", // removed I, O
+        numbers: "346789", // removed 0, 1, 2, 5
+        special: "!\"#$%&'()*+,-.:;<=>?@^_`{|}~" // removed \/
+    };
 
-
-    // iterate through each input and grab its value
-    // at the same time, iterate through each dict and access its key
-    // randomly select a value based on the length of the key
-
-    let password = "";
-    for (const key in characterSetAmbiguous) {
-        for (int i = 0; i < )
+    if (document.getElementById("ambiguous").checked) {
+        return characterSetUnambiguous;
+    } else {
+        return characterSetAmbiguous;
     }
-
-    // let selectedCharacters = {};
-    // let passwordLength = 0;
-    // for (let i = 0; i < customInputsLength; i++) {
-    //     selectedCharacters[customInputs[i].id] = customInputs[i].value;
-    //     passwordLength += customInputs.value;
-    // }
-
-    // let password;
-    // for (let i = 0; i < customInputsLength; i++) {
-    //     const currentCustomInput = customInputs[i];
-    //     for (let j = 0; j < currentCustomInput.length; j++) {
-    //         const choice = selectedCharacters[Math.floor(Math.random() * customInputs[i].length)];
-    //         const charSet = characterSetAmbiguous[choice];
-    //         const chosenCharacter = charSet[Math.floor(Math.random() * charSet.length)];
-    //         password += chosenCharacter;
-    //     }
-    // }
-
 }
 
 function randomiseButton() {
+    // randomise the various inputs
     document.getElementById("randomise-button").addEventListener("click", function () {
         const customInputs = document.getElementsByClassName("custom-input");
         const customSliders = document.getElementsByClassName("custom-slider");
-
 
         const maxSliderLength = document.getElementsByClassName("custom-slider")[0].max
         const customInputsLength = customInputs.length;
@@ -92,9 +123,41 @@ function randomiseButton() {
     })
 }
 
-document.getElementById("generate-button").addEventListener("click", function () {
-    generatePassword();
-})
+function shuffleString(inputString) {
 
-setupSliderAndInput();
-randomiseButton();
+    // convert the string to an array of characters
+    const charArray = inputString.split('');
+
+    // shuffle the array using the Fisher-Yates algorithm
+    for (let i = charArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [charArray[i], charArray[j]] = [charArray[j], charArray[i]];
+    }
+
+    // join the shuffled characters back into a string and return
+    return charArray.join('');
+}
+
+function setupCopyButton() {
+    document.getElementById("copy-button").addEventListener("click", function () {
+        const result = document.getElementById("result");
+        if (result.value === "") {
+            document.getElementById("error-message").innerText = "Nothing to copy."
+        } else {
+            result.select();
+            result.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(result.value).then(() => {
+            });
+            result.blur();
+            document.getElementById("error-message").innerText = "Password copied to clipboard!";
+        }
+    })
+}
+
+function setupGenerateButton() {
+    document.getElementById("generate-button").addEventListener("click", function () {
+        generatePassword();
+    })
+}
+
+main();

@@ -117,6 +117,7 @@ async function setupGenerateButton() {
         updateHistoryAndLocalStorage(passwordTrimmed);
         result.value = passwordTrimmed;
     }
+
     generatePassword();
 }
 

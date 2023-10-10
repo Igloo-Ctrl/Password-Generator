@@ -1,3 +1,8 @@
+function main() {
+    setupSliderAndInput();
+    setupGenerateMethods()
+}
+
 function setupSliderAndInput() {
     const shiftInput = document.getElementById("caesar-input");
     const shiftSlider = document.getElementById("caesar-slider");
@@ -197,5 +202,4 @@ async function createWordSet() {
     return wordSet;
 }
 
-setupSliderAndInput();
-setupGenerateMethods()
+main();
