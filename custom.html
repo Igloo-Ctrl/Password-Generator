@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator!</title>
     <link rel="stylesheet" href="css/simple.min.css">
     <link rel="stylesheet" href="css/standard.css">
@@ -23,32 +24,49 @@
 </header>
 
 <main>
-    # of letters
-    <label>
-        <input type="text" class="custom-input">
-        <input type="range" class="custom-slider">
-    </label>
-    # of numbers
-    <label>
-        <input type="text" class="custom-input">
-        <input type="range" class="custom-slider">
-    </label>
-    # of symbols
-    <label>
-        <input type="text" class="custom-input">
-        <input type="range" class="custom-slider">
-    </label>
-    # of special
-    <label>
-        <input type="text" class="custom-input">
-        <input type="range" class="custom-slider">
-    </label>
-    <label>
-        Characters to exclude:
-        <input type="text" id="excluded-characters">
-    </label>
+    <div>
+        # of lowercase
+        <label>
+            <input type="text" class="custom-input" id="lowercase">
+            <input type="range" class="custom-slider">
+        </label>
+    </div>
+    <div>
+        # of uppercase
+        <label>
+            <input type="text" class="custom-input" id="uppercase">
+            <input type="range" class="custom-slider">
+        </label>
+    </div>
+    <div>
+        # of numbers
+        <label>
+            <input type="text" class="custom-input" id="numbers">
+            <input type="range" class="custom-slider">
+        </label>
+    </div>
+    <div>
+        # of symbols
+        <label>
+            <input type="text" class="custom-input" id="symbols">
+            <input type="range" class="custom-slider">
+        </label>
+    </div>
+    <div>
+        <label>
+            Characters to exclude:
+            <input type="text" id="excluded-characters">
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" id="ambiguous">
+            Remove ambiguous characters
+        </label>
+    </div>
     <div>
         <button id="generate-button">Generate</button>
+        <button id="randomise-button">Randomise Values</button>
         <button>Copy</button>
     </div>
 

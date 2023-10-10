@@ -35,10 +35,60 @@ function setupSliderAndInput() {
 }
 
 function generatePassword() {
-    const excludedCharacters = document.getElementById("excluded-characters");
-    const excludedCharactersArray = excludedCharacters.toString().split("");
-    excludedCharactersArray.forEach(character => {
-        console.log(character);
+    const excludedCharacters = document.getElementById("excluded-characters").toString().split("");
+
+    const characterSetAmbiguous = {
+        lowercase: "abcdefghijklmnopqrstuvwxyz",
+        uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        numbers: "0123456789",
+        special: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    };
+
+    const customInputs = document.getElementsByClassName("custom-input");
+    const customInputsLength = customInputs.length;
+
+
+    // iterate through each input and grab its value
+    // at the same time, iterate through each dict and access its key
+    // randomly select a value based on the length of the key
+
+    let password = "";
+    for (const key in characterSetAmbiguous) {
+        for (int i = 0; i < )
+    }
+
+    // let selectedCharacters = {};
+    // let passwordLength = 0;
+    // for (let i = 0; i < customInputsLength; i++) {
+    //     selectedCharacters[customInputs[i].id] = customInputs[i].value;
+    //     passwordLength += customInputs.value;
+    // }
+
+    // let password;
+    // for (let i = 0; i < customInputsLength; i++) {
+    //     const currentCustomInput = customInputs[i];
+    //     for (let j = 0; j < currentCustomInput.length; j++) {
+    //         const choice = selectedCharacters[Math.floor(Math.random() * customInputs[i].length)];
+    //         const charSet = characterSetAmbiguous[choice];
+    //         const chosenCharacter = charSet[Math.floor(Math.random() * charSet.length)];
+    //         password += chosenCharacter;
+    //     }
+    // }
+
+}
+
+function randomiseButton() {
+    document.getElementById("randomise-button").addEventListener("click", function () {
+        const customInputs = document.getElementsByClassName("custom-input");
+        const customSliders = document.getElementsByClassName("custom-slider");
+
+
+        const maxSliderLength = document.getElementsByClassName("custom-slider")[0].max
+        const customInputsLength = customInputs.length;
+        for (let i = 0; i < customInputsLength; i++) {
+            customInputs[i].value = Math.floor(Math.random() * maxSliderLength);
+            customSliders[i].value = customInputs[i].value;
+        }
     })
 }
 
@@ -47,3 +97,4 @@ document.getElementById("generate-button").addEventListener("click", function ()
 })
 
 setupSliderAndInput();
+randomiseButton();

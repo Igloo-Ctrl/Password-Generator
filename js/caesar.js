@@ -97,6 +97,7 @@ function calculateCipher(originalText, offset) {
 }
 
 function populatePossibilities() {
+    // generate each possibility of cipher, populating the possibilities element and returning for further use
 
     const originalText = document.getElementById("original-text").value;
     const possibilityElement = document.getElementById("possibilities");
@@ -104,6 +105,7 @@ function populatePossibilities() {
 
     const possibilities = [];
 
+    // populate the possibilities details element
     for (let i = -25; i < 26; i++) {
         const possibilityEntry = document.createElement("tr");
         const possibilityOffset = document.createElement("td");
@@ -123,6 +125,7 @@ function populatePossibilities() {
 }
 
 function isAlpha(char) {
+    // checks if a character is alpha using regex
     const letterPattern = /^[A-Za-z]$/;
     return letterPattern.test(char);
 }
@@ -171,7 +174,8 @@ function determineLikelyMessage(wordSet, possibilities) {
 
 
 async function fetchWordList() {
-    // const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    // fetches the list of words from the url and returns them as an array
+    const oldWordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
     const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/41a0c40004c640b57183c480596ed1f0/raw/09bca8fb9d840134a8af3315e99a66f86d2849a1/gistfile1.txt"
     try {
         const response = await fetch(wordsUrl);
@@ -184,6 +188,7 @@ async function fetchWordList() {
 }
 
 async function createWordSet() {
+    // creates a word set for use in decoding ciphers
     const wordList = await fetchWordList();
     const wordSet = new Set();
     wordList.forEach(item => {
