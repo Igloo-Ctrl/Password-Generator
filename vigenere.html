@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigenère - Passwords & Such</title>
+    <link rel="stylesheet" href="css/simple.min.css">
+    <link rel="stylesheet" href="css/standard.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Passwords & Such</h1>
+        <nav>
+            <a href="index.html">Standard</a>
+            <a href="words.html">Words</a>
+            <a href="custom.html">Custom</a>
+            <a href="caesar.html">Caesar</a>
+            <a class="current" href="#">Vigenère</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div>
+            <label>
+                Original Text
+                <textarea rows=3 id="original-text"></textarea>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Ciphered Text
+                <textarea rows=3 id="ciphered-text"></textarea>
+            </label>
+        </div>
+        <div>
+            <label>
+                Keyword
+                <input id="keyword-input">
+            </label>
+        </div>
+        <br>
+        <div>
+            <details>
+                <summary>Explanation</summary>
+                <p>A Vigenère cipher is similar to a <a href="caesar.html">Caesar Cipher</a> but uses a keyword to
+                    determine the offset of each
+                    letter. Each letter in the keyword corresponds with a letter in the message and determines how much
+                    it should be offset by. For example, if the first letter of the keyword is <samp>A</samp>, that
+                    means the first
+                    letter of the message will be offset by 0. If it is offset by <samp>B</samp>, the first letter will
+                    be offset by
+                    1.</p>
+                <p>If the keyword is shorter than the message being ciphered then the keyword will be repeated until it
+                    is of the same length.</p>
+            </details>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Work In Progress</p>
+    </footer>
+
+    <script src="js/vigenere.js"></script>
+
+</body>
+</html>

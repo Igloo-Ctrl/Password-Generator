@@ -1,8 +1,11 @@
 function main() {
+    updateInitialHistory();
+    setupClearHistoryButton();
     setupSliderAndInput();
     randomiseButton();
     setupCopyButton();
     setupGenerateButton();
+    generatePassword();
 }
 
 function setupSliderAndInput() {
@@ -70,7 +73,8 @@ function generatePassword() {
         }
     }
 
-    document.getElementById("result").value = password;
+    document.getElementById("result").value = shuffleString(password);
+    updateHistoryAndLocalStorage(password);
 
 }
 
@@ -158,6 +162,64 @@ function setupGenerateButton() {
     document.getElementById("generate-button").addEventListener("click", function () {
         generatePassword();
     })
+}
+
+function setupClearHistoryButton() {
+    document.getElementById("clear-button").addEventListener("click", function () {
+        const passwords = document.getElementsByClassName("password");
+        const passwordsArray = Array.from(passwords);
+
+        passwordsArray.forEach(item => {
+            item.remove();
+        })
+
+        localStorage.removeItem("customPasswordHistory");
+    })
+}
+
+function updateHistoryAndLocalStorage(password) {
+    const key = "customPasswordHistory";
+    let passwordArray = [];
+
+    // checks if local storage exists
+    if (localStorage.getItem(key)) {
+        passwordArray = JSON.parse(localStorage.getItem(key));
+    }
+
+    // updates the local storage
+    passwordArray.push(password);
+    const escapedPassword = escapeHtml(password);
+    localStorage.setItem(key, JSON.stringify(passwordArray));
+
+    const history = document.getElementById("history");
+    const passwordListItem = document.createElement("li");
+    passwordListItem.className = "password";
+    passwordListItem.innerHTML = `<samp>${escapedPassword}</samp>`;
+    history.appendChild(passwordListItem);
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// updates the initial history once so the dom doesn't need to be constantly regenerated
+function updateInitialHistory() {
+    const key = "customPasswordHistory";
+    if (localStorage.getItem(key)) {
+        const passwordArray = JSON.parse(localStorage.getItem(key));
+        passwordArray.forEach(item => {
+            const history = document.getElementById("history");
+            const passwordListItem = document.createElement("li");
+            passwordListItem.className = "password";
+            passwordListItem.innerHTML = `<samp>${item}</samp>`;
+            history.appendChild(passwordListItem);
+        })
+    }
 }
 
 main();

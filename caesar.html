@@ -4,75 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator!</title>
+    <title>Caesar - Passwords & Such</title>
     <link rel="stylesheet" href="css/simple.min.css">
     <link rel="stylesheet" href="css/standard.css">
 </head>
 
 <body>
 
-<header>
-    <h1>Password Generator!</h1>
-    <nav>
-        <a href="index.html">Standard</a>
-        <a href="words.html">Words</a>
-        <a href="custom.html">Custom</a>
-        <a class="current" href="#">Caesar</a>
-    </nav>
-</header>
+    <header>
+        <h1>Passwords & Such</h1>
+        <nav>
+            <a href="index.html">Standard</a>
+            <a href="words.html">Words</a>
+            <a href="custom.html">Custom</a>
+            <a class="current" href="#">Caesar</a>
+            <a href="vigenere.html">Vigenère</a>
+        </nav>
+    </header>
 
-<main>
+    <main>
 
-    <div>
-        <label>
-            Original Text
-            <textarea rows=3 id="original-text"></textarea>
-        </label>
-    </div>
+        <div>
+            <label>
+                Original Text
+                <textarea rows=3 id="original-text"></textarea>
+            </label>
+        </div>
 
-    <div>
-        <label>
-            Ciphered Text
-            <textarea rows=3 id="ciphered-text"></textarea>
-        </label>
-    </div>
+        <div>
+            <label>
+                Ciphered Text
+                <textarea rows=3 id="ciphered-text"></textarea>
+            </label>
+        </div>
 
-    <div>
-        <label>
-            <input id="caesar-slider" type="range">
-        </label>
-    </div>
-    <div>
-        <label>
-            Characters to shift by
-            <input id="caesar-input">
-        </label>
-    </div>
-    <br>
-    <div>
-        <details>
-            <summary>Possibilities</summary>
-            <p>This section will show you the entered text with each possible offset. It also demonstrates how easy it is for a message of this nature to be decoded.</p>
-            <table id=possibilities>
-                <tr>
-                    <th>Offset</th>
-                    <th>Message</th>
-                </tr>
-            </table>
-        </details>
-        <details>
-            <summary>If I had to guess...</summary>
-            <p id="guess-paragraph">My prediction will go here once you enter some text.</p>
-        </details>
-    </div>
+        <div>
+            <label>
+                <input id="caesar-slider" type="range">
+            </label>
+        </div>
+        <div>
+            <label>
+                Characters to shift by
+                <input id="caesar-input">
+            </label>
+        </div>
+        <br>
+        <div>
+            <details>
+                <summary>Explanation</summary>
+                <p>A Caesar cipher is a simple encryption technique where each letter in the message is offset by a
+                    chosen amount. If you had the simple message of <samp>Abcde</samp> and shifted all the characters by
+                        1 to the right, the message would then read <samp>Bcdef</samp>.</p>
+                <p>If the offset causes any of the letters to surpass A or Z, it will wrap around to the other side of
+                    the alphabet.</p>
+            </details>
+            <details>
+                <summary>Possibilities</summary>
+                <p>This section will show you the entered text with each possible offset. It also demonstrates how easy
+                    it is for a message of this nature to be decoded.</p>
+                <table id=possibilities>
+                    <tr>
+                        <th>Offset</th>
+                        <th>Message</th>
+                    </tr>
+                </table>
+            </details>
+            <details>
+                <summary>If I had to guess...</summary>
+                <p id="guess-paragraph">My prediction will go here once you enter some text.</p>
+            </details>
+        </div>
 
-</main>
+    </main>
 
-<footer>
-    <p>Work In Progress</p>
-</footer>
+    <footer>
+        <p>Work In Progress</p>
+    </footer>
 
-<script src="js/caesar.js"></script>
+    <script src="js/caesar.js"></script>
 
 </body>
 </html>

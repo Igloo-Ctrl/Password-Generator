@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator!</title>
+    <title>Custom - Passwords & Such</title>
     <link rel="stylesheet" href="css/simple.min.css">
     <link rel="stylesheet" href="css/standard.css">
 </head>
@@ -13,13 +13,14 @@
 
     <header>
         <hgroup>
-            <h1>Password Generator!</h1>
+            <h1>Passwords & Such</h1>
         </hgroup>
         <nav>
             <a href="index.html">Standard</a>
             <a href="words.html">Words</a>
             <a class="current" href="custom.html">Custom</a>
             <a href="caesar.html">Caesar</a>
+            <a href="vigenere.html">Vigenère</a>
         </nav>
     </header>
 
@@ -52,6 +53,7 @@
                 <input type="range" class="custom-slider">
             </label>
         </div>
+        <br>
         <div>
             <label>
                 Characters to exclude:
@@ -77,7 +79,25 @@
             <button id="randomise-button">Randomise Values</button>
             <button id="copy-button">Copy</button>
         </div>
-
+        <br>
+        <div>
+            <details>
+                <summary>Character Sets</summary>
+                <p>Lowercase: <samp>abcdefghijklmnopqrstuvwxyz</samp></p>
+                <p>Uppercase: <samp>ABCDEFGHIJKLMNOPQRSTUVWXYZ</samp></p>
+                <p>Numbers: <samp>0123456789</samp></p>
+                <p>Special: <samp>!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~</samp></p>
+                <p>Ambiguous Characters: <samp>iolIO0125\/</samp></p>
+            </details>
+            <details>
+                <summary>History</summary>
+                <p>Previously generated passwords will appear here. These are saved locally and will be lost if you
+                    clear cookies.</p>
+                <button id="clear-button">Clear History</button>
+                <ol id="history">
+                </ol>
+            </details>
+        </div>
     </main>
 
     <footer>

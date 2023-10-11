@@ -17,6 +17,11 @@ li {
     width: 7%;
 }
 
+/*words*/
+#number-of-words-input, #word-length-input {
+    width: 6%;
+}
+
 /*caesar*/
 #caesar-slider {
     width: 100%;

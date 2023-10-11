@@ -48,6 +48,9 @@ function setupGenerateMethods() {
         document.getElementById("caesar-slider").addEventListener("change", function () {
             generateCipher(wordSet)
         });
+        document.getElementById("caesar-input").addEventListener("change", function() {
+            generateCipher(wordSet)
+        });
     });
 }
 
