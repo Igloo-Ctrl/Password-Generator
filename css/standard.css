@@ -17,6 +17,11 @@ li {
     width: 7%;
 }
 
+#github-logo {
+    max-width: 10%;
+    height: auto;
+}
+
 /*words*/
 #number-of-words-input, #word-length-input {
     width: 6%;

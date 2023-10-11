@@ -19,12 +19,18 @@ function generateCipher() {
     // lengthens the keyword if necessary and returns an offset array
     const offsets = keywordIntoOffsets(adjustKeyword(keyword));
 
+    /* the space offset is necessary for when the original text contains a non alpha character
+       rather annoyingly, the offset array should not be continued under this circumstance and should
+       in essence "pause", which is why the offset decrements down to the previous element
+     */
+    let spaceOffset = 0;
     let convertedText = "";
     for (let i = 0; i < originalText.length; i++) {
 
-        // skips the character if not alpha
+        // skips the character if not alpha and reduces the offset by 1 to correct the index
         if (!originalText[i].match(/^[A-Za-z]+$/)) {
             convertedText += originalText[i];
+            spaceOffset--;
             continue;
         }
 
@@ -33,14 +39,14 @@ function generateCipher() {
         // if a character has gotten to this point, it must be a letter
         // checks if it is a lowercase or uppercase and then deals with the potential wraparound
         if (convertedCharacter >= 97 && convertedCharacter <= 122) {
-            convertedCharacter += offsets[i]
+            convertedCharacter += offsets[i + spaceOffset]
             if (convertedCharacter < 97) {
                 convertedCharacter += 26;
             } else if (convertedCharacter > 122) {
                 convertedCharacter -= 26;
             }
         } else {
-            convertedCharacter += offsets[i]
+            convertedCharacter += offsets[i + spaceOffset]
             if (convertedCharacter < 65) {
                 convertedCharacter += 26;
             } else if (convertedCharacter > 90) {
@@ -52,6 +58,7 @@ function generateCipher() {
     }
 
     document.getElementById("ciphered-text").value = convertedText;
+    document.getElementById("error-message").textContent = String.fromCharCode(160); // blank character
 }
 
 function adjustKeyword(keyword) {
@@ -75,7 +82,6 @@ function keywordIntoOffsets(keyword) {
         const letterToChar = letter.charCodeAt(0);
         offsetArray.push(letterToChar - 97);
     })
-
     return offsetArray;
 }
 
