@@ -4,17 +4,20 @@ function main() {
 
 function generateCipher() {
     const keyword = document.getElementById("keyword-input").value.toString();
+    const originalText = document.getElementById("original-text").value;
 
     // checks if the keyword contains only letters, if not, return early
-    if (!keyword.match(/^[A-Za-z]+$/)) {
-        document.getElementById("error-message").innerText = "Please enter a keyword that only contains letters."
-        return;
+    const errorMessage = document.getElementById("error-message");
+    if (originalText.length === 0) {
+        return errorMessage.innerText = 'Please enter some text to generate a cipher.'
+    } else if (keyword.length === 0) {
+        return errorMessage.innerText = "Please enter a keyword."
+    } else if (!keyword.match(/^[A-Za-z]+$/)) {
+        return errorMessage.innerText = "Please enter a keyword that only contains letters."
     }
 
     // lengthens the keyword if necessary and returns an offset array
     const offsets = keywordIntoOffsets(adjustKeyword(keyword));
-
-    const originalText = document.getElementById("original-text").value;
 
     let convertedText = "";
     for (let i = 0; i < originalText.length; i++) {
@@ -74,12 +77,6 @@ function keywordIntoOffsets(keyword) {
     })
 
     return offsetArray;
-}
-
-function isAlpha(char) {
-    // checks if a character is alpha using regex
-    const letterPattern = /^[A-Za-z]$/;
-    return letterPattern.test(char);
 }
 
 function setupGenerateButton() {
