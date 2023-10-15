@@ -1,6 +1,7 @@
 function main() {
     setupEncodeButton();
     setupDecodeButton();
+    setupCopyButton();
     obscurePassword();
 }
 
@@ -127,13 +128,28 @@ function setupDecodeButton() {
 function obscurePassword() {
     const checkbox = document.getElementById("obscure-password-checkbox");
     const keywordInput = document.getElementById("keyword-input")
-    checkbox.addEventListener("change", function() {
+    checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             keywordInput.type = "password";
-        }
-        else {
+        } else {
             keywordInput.value = "";
             keywordInput.type = "";
+        }
+    })
+}
+
+function setupCopyButton() {
+    document.getElementById("copy-output-button").addEventListener("click", function () {
+        const result = document.getElementById("ciphered-text");
+        if (result.value !== "") {
+            result.select();
+            result.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(result.value).then(() => {
+            });
+            result.blur();
+            document.getElementById("error-message").innerText = "Password copied to clipboard!";
+        } else {
+            document.getElementById("error-message").innerText = "Nothing to copy."
         }
     })
 }
