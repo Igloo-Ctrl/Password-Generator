@@ -1,6 +1,7 @@
 function main() {
-    setupGenerateButton();
+    setupEncodeButton();
     setupDecodeButton();
+    obscurePassword();
 }
 
 function generateCipher(decode) {
@@ -77,7 +78,7 @@ function checkKeyword(originalText, keyword) {
     // checks if the keyword contains only letters, if not, return early
     const errorMessage = document.getElementById("error-message");
     if (originalText.length === 0) {
-        errorMessage.innerText = 'Please enter some text to generate a cipher.'
+        errorMessage.innerText = 'Please enter some text to generate or decode a cipher.'
     } else if (keyword.length === 0) {
         errorMessage.innerText = "Please enter a keyword."
     } else if (!keyword.match(/^[A-Za-z]+$/)) {
@@ -111,8 +112,8 @@ function keywordIntoOffsets(keyword) {
     return offsetArray;
 }
 
-function setupGenerateButton() {
-    document.getElementById("generate-button").addEventListener("click", function () {
+function setupEncodeButton() {
+    document.getElementById("encode-button").addEventListener("click", function () {
         generateCipher(false);
     });
 }
@@ -120,6 +121,20 @@ function setupGenerateButton() {
 function setupDecodeButton() {
     document.getElementById("decode-button").addEventListener("click", function () {
         generateCipher(true)
+    })
+}
+
+function obscurePassword() {
+    const checkbox = document.getElementById("obscure-password-checkbox");
+    const keywordInput = document.getElementById("keyword-input")
+    checkbox.addEventListener("change", function() {
+        if (checkbox.checked) {
+            keywordInput.type = "password";
+        }
+        else {
+            keywordInput.value = "";
+            keywordInput.type = "";
+        }
     })
 }
 
