@@ -1,19 +1,14 @@
 function main() {
     setupGenerateButton();
+    setupDecodeButton();
 }
 
-function generateCipher() {
+function generateCipher(decode) {
     const keyword = document.getElementById("keyword-input").value.toString();
     const originalText = document.getElementById("original-text").value;
 
-    // checks if the keyword contains only letters, if not, return early
-    const errorMessage = document.getElementById("error-message");
-    if (originalText.length === 0) {
-        return errorMessage.innerText = 'Please enter some text to generate a cipher.'
-    } else if (keyword.length === 0) {
-        return errorMessage.innerText = "Please enter a keyword."
-    } else if (!keyword.match(/^[A-Za-z]+$/)) {
-        return errorMessage.innerText = "Please enter a keyword that only contains letters."
+    if (checkKeyword(originalText, keyword) !== 1) {
+        return;
     }
 
     // lengthens the keyword if necessary and returns an offset array
@@ -25,6 +20,7 @@ function generateCipher() {
      */
     let spaceOffset = 0;
     let convertedText = "";
+
     for (let i = 0; i < originalText.length; i++) {
 
         // skips the character if not alpha and reduces the offset by 1 to correct the index
@@ -38,27 +34,57 @@ function generateCipher() {
 
         // if a character has gotten to this point, it must be a letter
         // checks if it is a lowercase or uppercase and then deals with the potential wraparound
-        if (convertedCharacter >= 97 && convertedCharacter <= 122) {
-            convertedCharacter += offsets[i + spaceOffset]
-            if (convertedCharacter < 97) {
-                convertedCharacter += 26;
-            } else if (convertedCharacter > 122) {
-                convertedCharacter -= 26;
+
+        // depending on if it is encode or decode, you will need to either subtract or plus the offset and I have yet
+        // to figure out a more elegant way
+        if (decode) {
+            if (convertedCharacter >= 97 && convertedCharacter <= 122) {
+                convertedCharacter -= offsets[i + spaceOffset]
+                convertedCharacter = characterCalculation(97, 122, convertedCharacter);
+            } else {
+                convertedCharacter -= offsets[i + spaceOffset]
+                convertedCharacter = characterCalculation(65, 90, convertedCharacter);
             }
         } else {
-            convertedCharacter += offsets[i + spaceOffset]
-            if (convertedCharacter < 65) {
-                convertedCharacter += 26;
-            } else if (convertedCharacter > 90) {
-                convertedCharacter -= 26;
+            if (convertedCharacter >= 97 && convertedCharacter <= 122) {
+                convertedCharacter += offsets[i + spaceOffset]
+                convertedCharacter = characterCalculation(97, 122, convertedCharacter);
+            } else {
+                convertedCharacter += offsets[i + spaceOffset]
+                convertedCharacter = characterCalculation(65, 90, convertedCharacter);
             }
         }
+
         // converts characters back from ascii
         convertedText += String.fromCodePoint(convertedCharacter);
     }
 
     document.getElementById("ciphered-text").value = convertedText;
     document.getElementById("error-message").textContent = String.fromCharCode(160); // blank character
+}
+
+function characterCalculation(lower, upper, character) {
+    // deals with the wrap around for lower and uppercase, depending on the passed in values
+    if (character < lower) {
+        character += 26;
+    } else if (character > upper) {
+        character -= 26;
+    }
+    return character;
+}
+
+function checkKeyword(originalText, keyword) {
+    // checks if the keyword contains only letters, if not, return early
+    const errorMessage = document.getElementById("error-message");
+    if (originalText.length === 0) {
+        errorMessage.innerText = 'Please enter some text to generate a cipher.'
+    } else if (keyword.length === 0) {
+        errorMessage.innerText = "Please enter a keyword."
+    } else if (!keyword.match(/^[A-Za-z]+$/)) {
+        errorMessage.innerText = "Please enter a keyword that only contains letters."
+    } else {
+        return 1;
+    }
 }
 
 function adjustKeyword(keyword) {
@@ -86,7 +112,15 @@ function keywordIntoOffsets(keyword) {
 }
 
 function setupGenerateButton() {
-    document.getElementById("generate-button").addEventListener("click", generateCipher);
+    document.getElementById("generate-button").addEventListener("click", function () {
+        generateCipher(false);
+    });
+}
+
+function setupDecodeButton() {
+    document.getElementById("decode-button").addEventListener("click", function () {
+        generateCipher(true)
+    })
 }
 
 main();
