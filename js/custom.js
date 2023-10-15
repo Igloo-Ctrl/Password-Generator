@@ -6,6 +6,7 @@ function main() {
     setupCopyButton();
     setupGenerateButton();
     generatePassword();
+    calculatePasswordLength();
 }
 
 function setupSliderAndInput() {
@@ -21,6 +22,11 @@ function setupSliderAndInput() {
 
         customSliders[i].addEventListener("input", function () {
             customInputs[i].value = customSliders[i].value;
+            calculatePasswordLength();
+        })
+
+        customInputs[i].addEventListener("input", function() {
+            calculatePasswordLength();
         })
 
         customSliders[i].min = MIN_SHIFT_VALUE;
@@ -45,7 +51,6 @@ function setupSliderAndInput() {
 }
 
 function generatePassword() {
-
 
     const excludedCharacters = document.getElementById("excluded-characters").value.toString().split("");
     const excludedCharactersSet = new Set(excludedCharacters);
@@ -121,9 +126,10 @@ function randomiseButton() {
         const maxSliderLength = document.getElementsByClassName("custom-slider")[0].max
         const customInputsLength = customInputs.length;
         for (let i = 0; i < customInputsLength; i++) {
-            customInputs[i].value = Math.floor(Math.random() * maxSliderLength);
+            customInputs[i].value = Math.floor(Math.random() * maxSliderLength + 1); // 0 - 25
             customSliders[i].value = customInputs[i].value;
         }
+        calculatePasswordLength();
     })
 }
 
@@ -221,5 +227,21 @@ function updateInitialHistory() {
         })
     }
 }
+
+function calculatePasswordLength() {
+    const customInputs = document.getElementsByClassName("custom-input");
+    const passwordLengthText = document.getElementById("password-length");
+
+    let total = 0;
+    for (let i = 0; i < customInputs.length; i++) {
+        total += parseInt(customInputs[i].value);
+    }
+    if (total === 0) {
+        passwordLengthText.innerText = "😞 "
+    } else {
+        passwordLengthText.innerText = `Password length: ${total}`;
+    }
+}
+
 
 main();

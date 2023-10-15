@@ -12,75 +12,75 @@
 
 <body>
 
-    <header>
-        <h1>Passwords & Such</h1>
-        <nav>
-            <a href="index.html">Standard</a>
-            <a href="words.html">Words</a>
-            <a href="custom.html">Custom</a>
-            <a href="caesar.html">Caesar</a>
-            <a class="current" href="#">Vigenère</a>
-        </nav>
-    </header>
+<header>
+    <h1>Passwords & Such</h1>
+    <nav>
+        <a href="index.html">Standard</a>
+        <a href="words.html">Words</a>
+        <a href="custom.html">Custom</a>
+        <a href="caesar.html">Caesar</a>
+        <a class="current" href="#">Vigenère</a>
+    </nav>
+</header>
 
-    <main>
+<main>
 
-        <div>
-            <label>
-                Original Text
-                <textarea rows=3 id="original-text"></textarea>
-            </label>
-        </div>
+    <div>
+        <label>
+            Input
+            <textarea rows=3 id="original-text"></textarea>
+        </label>
+    </div>
 
-        <div>
-            <label>
-                Ciphered Text
-                <textarea rows=3 id="ciphered-text"></textarea>
-            </label>
-        </div>
-        <div>
-            <p id="error-message">&nbsp;</p>
-        </div>
-        <div>
-            <label>
-                <input type="checkbox" id="obscure-password-checkbox">
-                Obfuscate Keyword
-            </label>
-            <label>
-                Keyword
-                <input id="keyword-input">
-            </label>
-        </div>
-        <div>
-            <button id="encode-button">Encode</button>
-            <button id="decode-button">Decode</button>
-        </div>
-        <br>
-        <div>
-            <details>
-                <summary>Explanation</summary>
-                <p>A Vigenère cipher is similar to a <a href="caesar.html">Caesar Cipher</a> but uses a keyword to
-                    determine the offset of each
-                    letter. Each letter in the keyword corresponds with a letter in the message and determines how much
-                    it should be offset by. For example, if the first letter of the keyword is <b>A</b>, that
-                    means the first
-                    letter of the message will be offset by 0. If it is offset by <b>B</b>, the first letter will
-                    be offset by
-                    1.</p>
-                <p>If the keyword is shorter than the message being ciphered then the keyword will be repeated until it
-                    is of the same length.</p>
-            </details>
-        </div>
+    <div>
+        <label>
+            Output
+            <textarea rows=3 id="ciphered-text"></textarea>
+        </label>
+    </div>
+    <div>
+        <p id="error-message">&nbsp;</p>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" id="obscure-password-checkbox">
+            Obfuscate Keyword
+        </label>
+        <label>
+            Keyword
+            <input id="keyword-input">
+        </label>
+    </div>
+    <div>
+        <button id="encode-button">Encode</button>
+        <button id="decode-button">Decode</button>
+    </div>
+    <br>
+    <div>
+        <details>
+            <summary>Explanation</summary>
+            <p>A Vigenère cipher is similar to a <a href="caesar.html">Caesar Cipher</a> but uses a keyword to
+                determine the offset of each
+                letter. Each letter in the keyword corresponds with a letter in the message and determines how much
+                it should be offset by. For example, if the first letter of the keyword is <b>A</b>, that
+                means the first
+                letter of the message will be offset by 0. If it is offset by <b>B</b>, the first letter will
+                be offset by
+                1.</p>
+            <p>If the keyword is shorter than the message being ciphered then the keyword will be repeated until it
+                is of the same length.</p>
+        </details>
+    </div>
 
-    </main>
+</main>
 
-    <footer>
-        <a href="https://github.com/Igloo-Ctrl" target="_blank">
-            <img id="github-logo" src="images/github-mark-white.png" alt="github-logo">
-        </a>
-    </footer>
+<footer>
+    <a href="https://github.com/Igloo-Ctrl" target="_blank">
+        <img id="github-logo" src="images/github-mark-white.png" alt="github-logo">
+    </a>
+</footer>
 
-    <script src="js/vigenere.js"></script>
+<script src="js/vigenere.js"></script>
 
 </body>
 </html>
