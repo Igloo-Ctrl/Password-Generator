@@ -2,7 +2,7 @@ function main() {
     setupEncodeButton();
     setupDecodeButton();
     setupCopyButton();
-    obscurePassword();
+    obscureKeyword();
 }
 
 function generateCipher(decode) {
@@ -37,8 +37,7 @@ function generateCipher(decode) {
         // if a character has gotten to this point, it must be a letter
         // checks if it is a lowercase or uppercase and then deals with the potential wraparound
 
-        // depending on if it is encode or decode, you will need to either subtract or plus the offset and I have yet
-        // to figure out a more elegant way
+        // depending on if it is encode or decode, you will need to either subtract or plus the offset
         if (decode) {
             if (convertedCharacter >= 97 && convertedCharacter <= 122) {
                 convertedCharacter -= offsets[i + spaceOffset]
@@ -76,7 +75,7 @@ function characterCalculation(lower, upper, character) {
 }
 
 function checkKeyword(originalText, keyword) {
-    // checks if the keyword contains only letters, if not, return early
+    // checks if the keyword contains only letters
     const errorMessage = document.getElementById("error-message");
     if (originalText.length === 0) {
         errorMessage.innerText = 'Please enter some text to generate or decode a cipher.'
@@ -125,12 +124,14 @@ function setupDecodeButton() {
     })
 }
 
-function obscurePassword() {
+function obscureKeyword() {
+    // obscures the keyword by converting it into a password field and removes the keyword (for safety) upon unchecking
     const checkbox = document.getElementById("obscure-password-checkbox");
     const keywordInput = document.getElementById("keyword-input")
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             keywordInput.type = "password";
+            document.getElementById("original-text").type = "password";
         } else {
             keywordInput.value = "";
             keywordInput.type = "";

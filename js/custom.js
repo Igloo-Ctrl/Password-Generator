@@ -10,6 +10,7 @@ function main() {
 }
 
 function setupSliderAndInput() {
+
     const customInputs = document.getElementsByClassName("custom-input");
     const customSliders = document.getElementsByClassName("custom-slider");
 
@@ -213,8 +214,8 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-// updates the initial history once so the dom doesn't need to be constantly regenerated
 function updateInitialHistory() {
+    // updates the initial history once so the dom doesn't need to be constantly regenerated
     const key = "customPasswordHistory";
     if (localStorage.getItem(key)) {
         const passwordArray = JSON.parse(localStorage.getItem(key));
