@@ -13,20 +13,18 @@ li {
     overflow-wrap: anywhere;
 }
 
-#length-input, #caesar-input, .custom-input, #number-of-words-input, #word-length-input {
+#length-input, #caesar-input, .custom-input {
     width: 7%;
-}
-
-/*mobile*/
-@media (max-width: 768px) {
-    #length-input, #caesar-input, .custom-input, #number-of-words-input, #word-length-input {
-        width: 15%;
-    }
 }
 
 #github-logo {
     max-width: 10%;
     height: auto;
+}
+
+/*words*/
+#number-of-words-input, #word-length-input {
+    width: 6%;
 }
 
 /*caesar*/

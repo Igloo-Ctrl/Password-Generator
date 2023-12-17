@@ -144,6 +144,7 @@ function determineLikelyMessage(wordSet, possibilities) {
     let possibilityDict = {};
 
     // check each possibility and calculate how many of its words are English
+    // goes through each word and checks if my word list has it, if so, its value in the dict is incremented
     for (const possibility of possibilities) {
         possibilityDict[possibility] = 0;
         const wordsArray = possibility.split(" ");
@@ -156,6 +157,8 @@ function determineLikelyMessage(wordSet, possibilities) {
     }
 
     // find the possibility with the highest occurrence of English words
+    // iterates through possibilityDict and finds which occurrence has the same amount of words in the cipher
+    // it is assumed that the one with the same amount of words to English words will be the correct one
     let likelyMessage;
     outerLoop: for (let i = count; i > 0; i--) {
         for (const key in possibilityDict) {
@@ -183,7 +186,7 @@ function determineLikelyMessage(wordSet, possibilities) {
 
 async function fetchWordList() {
     // fetches the list of words from the url and returns them as an array
-    const oldWordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
+    // const oldWordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/c7b42e883b92da19c1309b4dff42035f/raw/31f7569a57d58397002c6199de49b5e9177256db/words.txt";
     const wordsUrl = "https://gist.githubusercontent.com/Igloo-Ctrl/41a0c40004c640b57183c480596ed1f0/raw/09bca8fb9d840134a8af3315e99a66f86d2849a1/gistfile1.txt"
     try {
         const response = await fetch(wordsUrl);
