@@ -15,17 +15,12 @@ li {
 
 /*making my widths more mobile friendly*/
 #length-input, #caesar-input, .custom-input, #number-of-words-input, #word-length-input {
-    width: 7%;
+    width: 10%;
 }
 
 #github-logo {
     max-width: 10%;
     height: auto;
-}
-
-/*words*/
-#number-of-words-input, #word-length-input {
-    width: 6%;
 }
 
 /*caesar*/
