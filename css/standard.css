@@ -15,7 +15,7 @@ li {
 
 /*making my widths more mobile friendly*/
 #length-input, #caesar-input, .custom-input, #number-of-words-input, #word-length-input {
-    width: 10%;
+    width: 15%;
 }
 
 #github-logo {
